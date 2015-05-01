@@ -1,0 +1,15 @@
+<table class="table">
+    <tr>
+        <td>Samurai</td>
+        <td>
+            <select data-bind="options: troops.tiers,
+                               optionsCaption: '',
+                               optionsText: 'level',
+                               value: chosenLevel"></select>
+            <input pattern="[0-9]*">
+            <p data-bind="with: chosenLevel">
+                You have chosen level<strong data-bind="text: level"></strong>
+                With training cost of <strong data-bind="text: training_cost"></strong>
+            </p>
+        </td>
+</table>
