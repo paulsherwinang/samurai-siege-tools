@@ -1,15 +1,20 @@
-<table class="table">
+<table class="table" data-bind="foreach: troops">
     <tr>
-        <td>Samurai</td>
+        <td data-bind="text: name"></td>
         <td>
-            <select data-bind="options: troops.tiers,
+            <select data-bind="options: tiers,
                                optionsCaption: '',
                                optionsText: 'level',
                                value: chosenLevel"></select>
-            <input pattern="[0-9]*">
+
+            <input type="number" length="3" data-bind="value: chosenQuantity">
+
             <p data-bind="with: chosenLevel">
-                You have chosen level<strong data-bind="text: level"></strong>
+                You have chosen level <strong data-bind="text: level"></strong>
                 With training cost of <strong data-bind="text: training_cost"></strong>
             </p>
+            in <strong data-bind="text: chosenQuantity"></strong>
+            <p>Total Quantity is <strong data-bind="text: $parent.computeTotalTroopCost()"></strong></p>
         </td>
+    </tr>
 </table>
