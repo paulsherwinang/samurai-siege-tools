@@ -1,13 +1,21 @@
-define(["jquery", "knockout", "text!./dojo-calculator.html"], function($, ko, dojoCalcTemplate){
+define([
+    "jquery",
+    "lodash",
+    "knockout",
+    "text!./dojo-calculator.html"
+], function(
+    $,
+    _,
+    ko,
+    dojoCalcTemplate){
     
     var troopsData = [
         {
             "id": "1",
             "name": "Samurai",
+            "image": "images/samurai-small.jpg",
             "space": 1,
             "attack_range": "0.4",
-            "chosenLevel": ko.observable(),
-            "chosenQuantity": ko.observable(),
             "seconds_per_attack": "1",
             "walk_speed": "2",
             "training_time": 20000,
@@ -57,10 +65,9 @@ define(["jquery", "knockout", "text!./dojo-calculator.html"], function($, ko, do
         {
             "id": "2",
             "name": "Ninja",
+            "image": "images/ninja-small.jpg",
             "space": 1,
             "attack_range": "0.4",
-            "chosenLevel": ko.observable(),
-            "chosenQuantity": ko.observable(),
             "seconds_per_attack": "0.5",
             "walk_speed": "2",
             "training_time": 30000,
@@ -117,13 +124,30 @@ define(["jquery", "knockout", "text!./dojo-calculator.html"], function($, ko, do
         },
     ]
 
-    function DojoCalcViewModel () {
-        this.troops = troopsData;
-        this.chosenLevel = ko.observable();
+    function TroopModel(troopData) {
+        var self = this;
 
-        this.computeTotalTroopCost = ko.computed(function() {
-            return this.chosenQuantity * this.cost_to_upgrade;
-        }, this);
+        self.troop = troopData;
+
+        self.chosenQuantity = ko.observable();
+        self.chosenLevel = ko.observable();
+
+        self.getTotalTrainingTime = ko.computed(function(){
+            return self.chosenQuantity() * self.troop.training_time;
+        });
+
+        self.getTotalCost = ko.computed(function(){
+            if(_.isEmpty(self.chosenLevel())) return;
+            return self.chosenQuantity() * self.chosenLevel().training_cost;
+        });
+    }
+
+    function DojoCalcViewModel () {
+        var self = this;
+
+        self.troops = _.map(troopsData, function(troop){
+            return new TroopModel(troop);
+        });
     }
 
     return { viewModel: DojoCalcViewModel, template: dojoCalcTemplate};

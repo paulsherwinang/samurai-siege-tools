@@ -5636,4 +5636,8 @@ button.close {
   .hidden-print {
     display: none !important; } }
 body {
+  font-family: "Roboto", sans-serif;
   padding-top: 70px; }
+
+table .troop-quantity {
+  height: 20px; }

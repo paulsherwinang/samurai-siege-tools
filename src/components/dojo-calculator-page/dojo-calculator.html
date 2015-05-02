@@ -1,20 +1,32 @@
-<table class="table" data-bind="foreach: troops">
-    <tr>
-        <td data-bind="text: name"></td>
-        <td>
-            <select data-bind="options: tiers,
-                               optionsCaption: '',
-                               optionsText: 'level',
-                               value: chosenLevel"></select>
+<div id="dojo-calculator">
+    <h3>Dojo</h3>
+    <table id="dojo-table" class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Troop</td>
+                <td>Level</td>
+                <td>Quantity</td>
+                <td>Total Elixir</td>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: troops">
+            <tr>
+                <td data-bind="text: troop.name"></td>
 
-            <input type="number" length="3" data-bind="value: chosenQuantity">
+                <td>
+                    <select data-bind="options: troop.tiers,
+                                       optionsText: 'level',
+                                       value: chosenLevel"></select>
+                </td>
 
-            <p data-bind="with: chosenLevel">
-                You have chosen level <strong data-bind="text: level"></strong>
-                With training cost of <strong data-bind="text: training_cost"></strong>
-            </p>
-            in <strong data-bind="text: chosenQuantity"></strong>
-            <p>Total Quantity is <strong data-bind="text: $parent.computeTotalTroopCost()"></strong></p>
-        </td>
-    </tr>
-</table>
+                <td>
+                    <a class="btn btn-default btn-xs" role="button"><i class="glyphicon glyphicon-minus"></i></a>
+                    <input class="troop-quantity" size="3" data-bind="value: chosenQuantity">
+                    <a class="btn btn-default btn-xs" role="button"><i class="glyphicon glyphicon-plus"></i></a>
+                </td>
+
+                <td data-bind="text: getTotalCost()"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
