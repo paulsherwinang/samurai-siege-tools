@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     htmlreplace = require('gulp-html-replace'),
     webserver = require('gulp-webserver'),
     sass = require('gulp-ruby-sass'),
-    watch = require('gulp-watch');
+    watch = require('gulp-watch'),
+    karma = require('gulp-karma');
 
 // Config
 var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require.config.js') + '; require;');
@@ -46,11 +47,9 @@ gulp.task('js', function () {
 
 // Concatenates CSS files, rewrites relative paths to Bootstrap fonts, copies Bootstrap fonts
 gulp.task('css', function () {
-    var bowerCss = gulp.src('src/bower_modules/components-bootstrap/css/bootstrap.min.css')
-            .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/')),
-        appCss = gulp.src('src/css/*.css'),
-        combinedCss = es.concat(bowerCss, appCss).pipe(concat('css.css')),
-        fontFiles = gulp.src('./src/bower_modules/components-bootstrap/fonts/*', { base: './src/bower_modules/components-bootstrap/' });
+    var appCss = gulp.src('src/css/*.css'),
+        combinedCss = es.concat(appCss).pipe(concat('css.css')),
+        fontFiles = gulp.src('./src/bower_modules/bootstrap-sass/assets/fonts/bootstrap/*', { base: './src/bower_modules/bootstrap-sass/assets/fonts/bootstrap/' });
     return es.concat(combinedCss, fontFiles)
         .pipe(gulp.dest('./dist/'));
 });
@@ -98,3 +97,16 @@ gulp.task('watchSass', function(){
 });
 
 gulp.task('serve', ['watchSass', 'httpServer']);
+
+
+gulp.task('test', function() {
+    return gulp.src('test/components/*.js')
+    .pipe(karma({
+      configFile: 'karma.conf.js',
+      action: 'run'
+    }))
+    .on('error', function(err) {
+      // Make sure failed tests cause gulp to exit non-zero 
+      throw err;
+    });
+})
