@@ -10,7 +10,7 @@
     "knockout": "~3.3.0-alpha",
     "knockout-projections": "~1.1.0",
     "bootstrap-sass": "~3.3.4",
-    "underscore": "~1.8.3"
+    "lodash": "~3.8.0"
   },
   "resolutions": {
     "knockout": "~3.3.0-alpha"
