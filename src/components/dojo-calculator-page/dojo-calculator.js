@@ -189,14 +189,6 @@ define([
         self.chosenQuantity = ko.observable(0);
         self.chosenLevel = ko.observable();
 
-        self.adjustQuantity = function(num) {
-            var currentVal = parseInt(self.chosenQuantity());
-
-            if((currentVal+num) < 0) return;
-
-            self.chosenQuantity(currentVal+num);
-        };
-
         self.getTotalTrainingTime = ko.computed(function(){
             return self.chosenQuantity() * self.troop.training_time;
         });
@@ -209,6 +201,14 @@ define([
         self.getTotalYardSpace = ko.computed(function(){
             return self.chosenQuantity() * self.troop.space;
         });
+
+        self.adjustQuantity = function(num) {
+            var currentVal = parseInt(self.chosenQuantity());
+
+            if((currentVal+num) < 0) return;
+
+            self.chosenQuantity(currentVal+num);
+        };
     }
 
     function DojoCalcViewModel () {
@@ -229,6 +229,16 @@ define([
                 return troop.getTotalYardSpace();
             }).reduce(function(total, n){ return total + n });
         });
+
+        self.getGrandTotalCost = ko.computed(function(){
+            return total = _.map(self.troops, function(troop){
+                return troop.getTotalCost();
+            }).reduce(function(total, n){ return total + n });
+        });
+
+        self.numberWithCommas = function(num){
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
     }
 
     return { viewModel: DojoCalcViewModel, template: dojoCalcTemplate};

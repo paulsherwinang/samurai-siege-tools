@@ -28,15 +28,15 @@
                     <a id="plus-time-btn" class="btn btn-default btn-xs timeBtn" role="button" data-bind="click: adjustQuantity(1)">+</a>
                 </td>
 
-                <td class="troop-cost" data-bind="text: getTotalCost()"></td>
+                <td class="troop-cost" data-bind="text: $parent.numberWithCommas(getTotalCost())"></td>
             </tr>
             <!-- /ko -->
 
-            <tr>
+            <tr class="grand-total">
                 <td></td>
                 <td></td>
                 <td data-bind="text: getGrandTotalYardSpace()"></td>
-                <td>0</td>
+                <td data-bind="text: numberWithCommas(getGrandTotalCost())"></td>
             </tr>
         </tbody>
     </table>
