@@ -1,31 +1,42 @@
 <div id="dojo-calculator">
-    <h3>Dojo</h3>
+    <h4>Dojo</h4>
     <table id="dojo-table" class="table table-bordered">
         <thead>
             <tr>
-                <td>Troop</td>
-                <td>Level</td>
-                <td>Quantity</td>
-                <td>Total Elixir</td>
+                <td class="troop-name">Troop</td>
+                <td class="troop-level">Level</td>
+                <td class="troop-qty">Quantity<a class="qty-clear btn btn-danger btn-xs" role="button" data-bind="click: clearAllQuantity()">Clear</a></td>
+                <td class="troop-cost">Total Elixir</td>
             </tr>
         </thead>
-        <tbody data-bind="foreach: troops">
+        <tbody>
+            <!-- ko foreach: troops -->
             <tr>
-                <td data-bind="text: troop.name"></td>
+                <td class="troop-name" data-bind="text: troop.name"></td>
 
-                <td>
+                <td class="troop-level">
                     <select data-bind="options: troop.tiers,
                                        optionsText: 'level',
                                        value: chosenLevel"></select>
                 </td>
 
-                <td>
-                    <a class="btn btn-default btn-xs" role="button"><i class="glyphicon glyphicon-minus"></i></a>
+                <td class="troop-qty">
+                    <a id="minus-time-btn" class="btn btn-default btn-xs timeBtn" role="button" data-bind="click: adjustQuantity(-1), css: { disabled: chosenQuantity() === 0 }">–</a>
+
                     <input class="troop-quantity" size="3" data-bind="value: chosenQuantity">
-                    <a class="btn btn-default btn-xs" role="button"><i class="glyphicon glyphicon-plus"></i></a>
+
+                    <a id="plus-time-btn" class="btn btn-default btn-xs timeBtn" role="button" data-bind="click: adjustQuantity(1)">+</a>
                 </td>
 
-                <td data-bind="text: getTotalCost()"></td>
+                <td class="troop-cost" data-bind="text: getTotalCost()"></td>
+            </tr>
+            <!-- /ko -->
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-bind="text: getGrandTotalYardSpace()"></td>
+                <td>0</td>
             </tr>
         </tbody>
     </table>

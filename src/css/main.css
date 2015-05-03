@@ -5639,5 +5639,14 @@ body {
   font-family: "Roboto", sans-serif;
   padding-top: 70px; }
 
-table .troop-quantity {
+table thead {
+  font-weight: bold; }
+  table thead .qty-clear {
+    line-height: 13px;
+    margin-left: 10px; }
+table tbody .troop-quantity {
   height: 20px; }
+table tbody .timeBtn {
+  padding: 0 4px;
+  font-size: 16px;
+  line-height: 18px; }

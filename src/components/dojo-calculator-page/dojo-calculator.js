@@ -122,6 +122,63 @@ define([
                 }
             ]
         },
+        {
+            "id": "3",
+            "name": "Ram",
+            "image": "images/ram-small.jpg",
+            "space": 5,
+            "attack_range": "0.5",
+            "seconds_per_attack": "0.1",
+            "walk_speed": "3",
+            "training_time": 120000,
+            "tiers": [
+                {
+                    "level": 1,
+                    "dps": 975,
+                    "health": 68,
+                    "training_cost": 3600,
+                    "cost_to_upgrade": null,
+                    "time_to_upgrade": null,
+                    "blacksmith_level": null
+                },
+                {
+                    "level": 2,
+                    "dps": 1425,
+                    "health": 74,
+                    "training_cost": 5800,
+                    "cost_to_upgrade": 360000,
+                    "time_to_upgrade": 86400000,
+                    "blacksmith_level": 1
+                },
+                {
+                    "level": 3,
+                    "dps": 1950,
+                    "health": 82,
+                    "training_cost": 8600,
+                    "cost_to_upgrade": 900000,
+                    "time_to_upgrade": 172800000,
+                    "blacksmith_level": 2
+                },
+                {
+                    "level": 4,
+                    "dps": 2550,
+                    "health": 53,
+                    "training_cost": 12000,
+                    "cost_to_upgrade": 2700000,
+                    "time_to_upgrade": 259200000,
+                    "blacksmith_level": 3
+                },
+                {
+                    "level": 5,
+                    "dps": 3600,
+                    "health": 63,
+                    "training_cost": 15000,
+                    "cost_to_upgrade": 8100000,
+                    "time_to_upgrade": 432000000,
+                    "blacksmith_level": 4
+                }
+            ]
+        },
     ]
 
     function TroopModel(troopData) {
@@ -129,8 +186,16 @@ define([
 
         self.troop = troopData;
 
-        self.chosenQuantity = ko.observable();
+        self.chosenQuantity = ko.observable(0);
         self.chosenLevel = ko.observable();
+
+        self.adjustQuantity = function(num) {
+            var currentVal = parseInt(self.chosenQuantity());
+
+            if((currentVal+num) < 0) return;
+
+            self.chosenQuantity(currentVal+num);
+        };
 
         self.getTotalTrainingTime = ko.computed(function(){
             return self.chosenQuantity() * self.troop.training_time;
@@ -140,6 +205,10 @@ define([
             if(_.isEmpty(self.chosenLevel())) return;
             return self.chosenQuantity() * self.chosenLevel().training_cost;
         });
+
+        self.getTotalYardSpace = ko.computed(function(){
+            return self.chosenQuantity() * self.troop.space;
+        });
     }
 
     function DojoCalcViewModel () {
@@ -147,6 +216,18 @@ define([
 
         self.troops = _.map(troopsData, function(troop){
             return new TroopModel(troop);
+        });
+
+        self.clearAllQuantity = function(){
+            _.each(self.troops, function(troop){
+                troop.chosenQuantity(0);
+            });
+        }
+
+        self.getGrandTotalYardSpace = ko.computed(function(){
+            return total = _.map(self.troops, function(troop){
+                return troop.getTotalYardSpace();
+            }).reduce(function(total, n){ return total + n });
         });
     }
 
