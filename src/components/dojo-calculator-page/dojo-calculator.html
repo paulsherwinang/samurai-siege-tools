@@ -7,13 +7,21 @@
         <div data-bind="text: chosenLevel().queueLength"></div>
     </div> -->
 
-    <div class="row" data-bind="foreach: practiceYards">
-        <div class="col-md-3">
-            <select data-bind="options: data,
-                            optionsText: 'level',
-                            value: chosenLevel"></select>
-            <div data-bind="text: chosenLevel().troopSpace"></div>
-        </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">Practice Yards</div>
+        <div class="panel-body">
+            <div class="row">
+                
+                <!-- ko foreach: practiceYards -->
+                <div class="col-md-3">
+                    <select data-bind="options: data,
+                                    optionsText: 'level',
+                                    value: chosenLevel"></select>
+                    <div data-bind="text: chosenLevel().troopSpace"></div>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>  
     </div>
 
     <table id="dojo-table" class="table table-bordered">
@@ -21,7 +29,7 @@
             <tr>
                 <td colspan="2" class="troop-name-row">Troop</td>
                 <td class="troop-level-row">Level</span></td>
-                <td class="troop-qty-row">Quantity<a class="qty-clear btn btn-danger btn-xs" role="button" data-bind="click: clearAllQuantity()">Clear</a></td>
+                <td class="troop-qty-row">Qty<a class="qty-clear btn btn-danger btn-xs" role="button" data-bind="click: clearAllQuantity()">Clear</a></td>
                 <td class="troop-cost-row">Total <span class="essence-icon" style="margin-left: 5px"></td>
             </tr>
         </thead>

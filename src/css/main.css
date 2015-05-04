@@ -5669,6 +5669,8 @@ body {
     background: url("../images/commander-small.jpg"); }
   #dojo-calculator table tbody .troop-icon.Archer {
     background: url("../images/archer-small.jpg"); }
+  #dojo-calculator table tbody .troop-icon.Mongol {
+    background: url("../images/mongol-small.jpg"); }
   #dojo-calculator table tbody .troop-icon.Troll {
     background: url("../images/troll-small.jpg"); }
   #dojo-calculator table tbody .troop-icon.Healer {
