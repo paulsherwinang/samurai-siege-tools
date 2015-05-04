@@ -13,7 +13,7 @@ define(["knockout", "crossroads", "hasher"], function(ko, crossroads, hasher) {
         routes: [
             { url: '',                  params: { page: 'home-page' } },
             { url: 'about',             params: { page: 'about-page' } },
-            { url: 'dojo-calc',         params: { page: 'dojo-calculator-page' } }
+            { url: 'dojo_calc',         params: { page: 'dojo-calculator-page' } }
         ]
     });
 

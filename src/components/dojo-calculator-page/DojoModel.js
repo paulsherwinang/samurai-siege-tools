@@ -1,8 +1,8 @@
 define(['knockout'], function(ko){
-    function DojoModel(dojoData) {
+    function DojoModel(dojoTiersData) {
         var self = this;
 
-        self.data = dojoData;
+        self.data = dojoTiersData;
         self.chosenLevel = ko.observable();
     }
 

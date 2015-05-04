@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-info">
-                <div class="panel-heading">Dojos</div>
+                <div class="panel-heading">Dojos Levels</div>
                 <div class="panel-body">
                     <div class="row">
                         <!-- ko foreach: dojos -->
@@ -13,7 +13,6 @@
                             <select data-bind="options: data,
                                             optionsText: 'level',
                                             value: chosenLevel"></select>
-                            <div data-bind="text: $parent.getTotalDojoQueueSpace()"></div>
                         </div>
                         <!-- /ko -->
                     </div>
@@ -22,10 +21,9 @@
         </div>
         <div class="col-sm-6">
             <div class="panel panel-info">
-                <div class="panel-heading">Practice Yards</div>
+                <div class="panel-heading">Practice Yards Level</div>
                 <div class="panel-body">
                     <div class="row">
-                        
                         <!-- ko foreach: practiceYards -->
                         <div class="col-xs-3">
                             <select data-bind="options: data,
@@ -41,11 +39,22 @@
 
     <table id="dojo-table" class="table table-bordered">
         <thead>
+            <tr style="text-align: center; font-weight: bold">
+                <td colspan="5">Troops</td>
+                <td colspan="4">Dojos</td>
+            </tr>
             <tr>
-                <td colspan="2" class="troop-name-row">Troop</td>
+                <td colspan="2" class="troop-name-row">Name</td>
                 <td class="troop-level-row">Level</span></td>
                 <td class="troop-qty-row">Qty<a class="qty-clear btn btn-danger btn-xs" role="button" data-bind="click: clearAllQuantity()">Clear</a></td>
                 <td class="troop-cost-row">Total <span class="essence-icon" style="margin-left: 5px"></span></td>
+                <!-- ko foreach: dojos -->
+                <td>
+                    <span data-bind="text: 'Lv.'+chosenLevel().level"></span><br>
+                    <span></span> /
+                    <span data-bind="text: chosenLevel().queueLength"></span>
+                </td>
+                <!-- /ko -->
             </tr>
         </thead>
         <tbody>
@@ -72,6 +81,14 @@
                 </td>
 
                 <td class="troop-cost-row" data-bind="text: $parent.numberWithCommas(getTotalCost())"></td>
+                
+
+                <!-- ko foreach: $parent.dojos -->
+                <td>
+                    <!-- <div data-bind="text: chosenLevel().queueLength"></div> -->
+                </td>
+                <!-- /ko -->
+                
             </tr>
             <!-- /ko -->
 

@@ -5646,11 +5646,11 @@ body {
   height: 15px;
   background: url("../images/essence.png"); }
 
-#dojo-calculator table thead {
+#dojo-calculator table thead .troop-name-row, #dojo-calculator table thead .troop-level-row, #dojo-calculator table thead .troop-qty-row, #dojo-calculator table thead .troop-cost-row {
   font-weight: bold; }
-  #dojo-calculator table thead .qty-clear {
-    line-height: 13px;
-    margin-left: 10px; }
+#dojo-calculator table thead .qty-clear {
+  line-height: 13px;
+  margin-left: 10px; }
 #dojo-calculator table tbody td {
   vertical-align: middle; }
 #dojo-calculator table tbody .troop-icon-row {
