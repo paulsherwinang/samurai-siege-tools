@@ -103,7 +103,7 @@ gulp.task('test', function() {
     return gulp.src('test/components/*.js')
     .pipe(karma({
       configFile: 'karma.conf.js',
-      action: 'run'
+      action: 'watch'
     }))
     .on('error', function(err) {
       // Make sure failed tests cause gulp to exit non-zero 

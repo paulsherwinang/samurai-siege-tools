@@ -1,9 +1,14 @@
-define(['components/dojo-calculator-page/dojo-calculator'], function(dojoCalc) {
-
-    var DojoCalcViewModel,
-        instance;
+define([
+    'components/dojo-calculator-page/dojo-calculator'
+], function(
+    dojoCalc
+) {
 
     describe('dojo calculator page', function() {
+
+        var DojoCalcViewModel,
+            instance;
+            
         beforeEach(function(){
           DojoCalcViewModel = dojoCalc.viewModel;
           instance = new DojoCalcViewModel();
