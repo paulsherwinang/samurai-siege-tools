@@ -5687,3 +5687,5 @@ body {
   padding: 0 4px;
   font-size: 16px;
   line-height: 18px; }
+#dojo-calculator table tbody .warning {
+  color: red; }
