@@ -76,7 +76,7 @@ gulp.task('default', ['html', 'js', 'css'], function(callback) {
 });
 
 gulp.task('httpServer', function(){
-    gulp.src('src')
+    gulp.src('.')
         .pipe(webserver({
             port: 8080,
             livereload: true,
@@ -97,16 +97,3 @@ gulp.task('watchSass', function(){
 });
 
 gulp.task('serve', ['watchSass', 'httpServer']);
-
-
-gulp.task('test', function() {
-    return gulp.src('test/components/*.js')
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: 'watch'
-    }))
-    .on('error', function(err) {
-      // Make sure failed tests cause gulp to exit non-zero 
-      throw err;
-    });
-})

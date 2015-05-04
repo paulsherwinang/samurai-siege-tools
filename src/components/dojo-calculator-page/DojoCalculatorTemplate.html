@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-info">
-                <div class="panel-heading">Dojos Levels</div>
+                <div class="panel-heading">Practice Yards Level</div>
                 <div class="panel-body">
                     <div class="row">
-                        <!-- ko foreach: dojos -->
+                        <!-- ko foreach: practiceYards -->
                         <div class="col-xs-3">
                             <select data-bind="options: data,
                                             optionsText: 'level',
@@ -21,10 +21,10 @@
         </div>
         <div class="col-sm-6">
             <div class="panel panel-info">
-                <div class="panel-heading">Practice Yards Level</div>
+                <div class="panel-heading">Dojos Levels</div>
                 <div class="panel-body">
                     <div class="row">
-                        <!-- ko foreach: practiceYards -->
+                        <!-- ko foreach: dojos -->
                         <div class="col-xs-3">
                             <select data-bind="options: data,
                                             optionsText: 'level',

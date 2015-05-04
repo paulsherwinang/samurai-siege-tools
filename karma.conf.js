@@ -15,9 +15,9 @@ module.exports = function(config) {
       'src/app/require.config.js',
       'test/require.config.js',
       'test/SpecRunner.karma.js',
-      { pattern: 'src/**/*.js', included: false },
+      { pattern: 'src/components/**/*.js', included: false },
       { pattern: 'src/**/*.html', included: false },
-      { pattern: 'test/**/*.js', included: false }
+      { pattern: 'test/components/**/*.js', included: false }
     ],
 
 
