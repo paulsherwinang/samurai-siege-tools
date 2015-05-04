@@ -1,27 +1,42 @@
 <div id="dojo-calculator">
-    <h4>Dojo</h4>
-<!--     <div data-bind="foreach: dojos">
-        <select data-bind="options: data,
-                            optionsText: 'level',
-                            value: chosenLevel"></select>
-        <div data-bind="text: chosenLevel().queueLength"></div>
-    </div> -->
+    <h4>Troop Calculator</h4>
 
-    <div class="panel panel-info">
-        <div class="panel-heading">Practice Yards</div>
-        <div class="panel-body">
-            <div class="row">
-                
-                <!-- ko foreach: practiceYards -->
-                <div class="col-md-3">
-                    <select data-bind="options: data,
-                                    optionsText: 'level',
-                                    value: chosenLevel"></select>
-                    <div data-bind="text: chosenLevel().troopSpace"></div>
-                </div>
-                <!-- /ko -->
+    
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">Dojos</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <!-- ko foreach: dojos -->
+                        <div class="col-xs-3">
+                            <select data-bind="options: data,
+                                            optionsText: 'level',
+                                            value: chosenLevel"></select>
+                            <div data-bind="text: $parent.getTotalDojoQueueSpace()"></div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>  
             </div>
-        </div>  
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">Practice Yards</div>
+                <div class="panel-body">
+                    <div class="row">
+                        
+                        <!-- ko foreach: practiceYards -->
+                        <div class="col-xs-3">
+                            <select data-bind="options: data,
+                                            optionsText: 'level',
+                                            value: chosenLevel"></select>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>  
+            </div>
+        </div>
     </div>
 
     <table id="dojo-table" class="table table-bordered">
@@ -30,7 +45,7 @@
                 <td colspan="2" class="troop-name-row">Troop</td>
                 <td class="troop-level-row">Level</span></td>
                 <td class="troop-qty-row">Qty<a class="qty-clear btn btn-danger btn-xs" role="button" data-bind="click: clearAllQuantity()">Clear</a></td>
-                <td class="troop-cost-row">Total <span class="essence-icon" style="margin-left: 5px"></td>
+                <td class="troop-cost-row">Total <span class="essence-icon" style="margin-left: 5px"></span></td>
             </tr>
         </thead>
         <tbody>
@@ -64,7 +79,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><span data-bind="text: getSpaceConsumed()"></span> / <span data-bind="text: getSpaceAvailable()"></span></td>
+                <td><span data-bind="text: getSpaceConsumed(), css: { warning: getSpaceConsumed() > getSpaceAvailable() }"></span> / <span data-bind="text: getSpaceAvailable()"></span></td>
                 <td data-bind="text: numberWithCommas(getGrandTotalCost())"></td>
             </tr>
         </tbody>

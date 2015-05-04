@@ -2,13 +2,120 @@ define([
     "jquery",
     "lodash",
     "knockout",
+    "./PracticeYardModel",
+    "./DojoModel",
+    "./TroopModel",
     "text!./dojo-calculator.html"
 ], function(
     $,
     _,
     ko,
+    PracticeYardModel,
+    DojoModel,
+    TroopModel,
     dojoCalcTemplate){
-    
+
+    var dojoData = [
+        {
+            "level": 0,
+            "queueLength": 0,
+            "castleLevel": 0,
+        },
+        {
+            "level": 1,
+            "queueLength": 20,
+            "castleLevel": 1,
+        },
+        {
+            "level": 2,
+            "queueLength": 25,
+            "castleLevel": 1,
+        },
+        {
+            "level": 3,
+            "queueLength": 30,
+            "castleLevel": 1,
+        },
+        {
+            "level": 4,
+            "queueLength": 35,
+            "castleLevel": 2,
+        },
+        {
+            "level": 5,
+            "queueLength": 40,
+            "castleLevel": 3,
+        },
+        {
+            "level": 6,
+            "queueLength": 45,
+            "castleLevel": 4,
+        },
+        {
+            "level": 7,
+            "queueLength": 50,
+            "castleLevel": 5,
+        },
+        {
+            "level": 8,
+            "queueLength": 55,
+            "castleLevel": 6,
+        },
+        {
+            "level": 9,
+            "queueLength": 60,
+            "castleLevel": 7,
+        },
+        {
+            "level": 10,
+            "queueLength": 65,
+            "castleLevel": 8,
+        }
+    ]
+
+    var practiceYardData = [
+        {
+            "level": 0,
+            "troopSpace": 0,
+            "castleLevel": 0,
+        },
+        {
+            "level": 1,
+            "troopSpace": 20,
+            "castleLevel": 1,
+        },
+        {
+            "level": 2,
+            "troopSpace": 30,
+            "castleLevel": 2,
+        },
+        {
+            "level": 3,
+            "troopSpace": 35,
+            "castleLevel": 3,
+        },
+        {
+            "level": 4,
+            "troopSpace": 40,
+            "castleLevel": 4,
+        },
+        {
+            "level": 5,
+            "troopSpace": 45,
+            "castleLevel": 5,
+        },
+        {
+            "level": 6,
+            "troopSpace": 50,
+            "castleLevel": 6,
+        },
+        {
+            "level": 7,
+            "troopSpace": 55,
+            "castleLevel": 9,
+        }
+    ]
+
     var troopsData = [
         {
             "id": "1",
@@ -487,140 +594,6 @@ define([
         },
     ]
 
-    var practiceYardData = [
-        {
-            "level": 1,
-            "troopSpace": 20,
-            "castleLevel": 1,
-        },
-        {
-            "level": 2,
-            "troopSpace": 30,
-            "castleLevel": 2,
-        },
-        {
-            "level": 3,
-            "troopSpace": 35,
-            "castleLevel": 3,
-        },
-        {
-            "level": 4,
-            "troopSpace": 40,
-            "castleLevel": 4,
-        },
-        {
-            "level": 5,
-            "troopSpace": 45,
-            "castleLevel": 5,
-        },
-        {
-            "level": 6,
-            "troopSpace": 50,
-            "castleLevel": 6,
-        },
-        {
-            "level": 7,
-            "troopSpace": 55,
-            "castleLevel": 9,
-        }
-    ]
-
-    var dojoData = [
-        {
-            "level": 1,
-            "queueLength": 20,
-            "castleLevel": 1,
-        },
-        {
-            "level": 2,
-            "queueLength": 25,
-            "castleLevel": 1,
-        },
-        {
-            "level": 3,
-            "queueLength": 30,
-            "castleLevel": 1,
-        },
-        {
-            "level": 4,
-            "queueLength": 35,
-            "castleLevel": 2,
-        },
-        {
-            "level": 5,
-            "queueLength": 40,
-            "castleLevel": 3,
-        },
-        {
-            "level": 6,
-            "queueLength": 45,
-            "castleLevel": 4,
-        },
-        {
-            "level": 7,
-            "queueLength": 50,
-            "castleLevel": 5,
-        },
-        {
-            "level": 8,
-            "queueLength": 55,
-            "castleLevel": 6,
-        },
-        {
-            "level": 9,
-            "queueLength": 60,
-            "castleLevel": 7,
-        },
-        {
-            "level": 10,
-            "queueLength": 65,
-            "castleLevel": 8,
-        }
-    ]
-
-    function DojoModel(dojoData) {
-        var self = this;
-
-        self.data =  dojoData;
-        self.chosenLevel = ko.observable();
-    }
-
-    function PracticeYardModel(practiceYardData) {
-        var self = this;
-
-        self.data = practiceYardData;
-        self.chosenLevel = ko.observable();
-    }
-
-    function TroopModel(troopData) {
-        var self = this;
-
-        self.troop = troopData;
-
-        self.chosenQuantity = ko.observable(0);
-        self.chosenLevel = ko.observable();
-
-        self.getTotalTrainingTime = ko.computed(function(){
-            return self.chosenQuantity() * self.troop.training_time;
-        });
-
-        self.getTotalCost = ko.computed(function(){
-            if(_.isEmpty(self.chosenLevel())) return;
-            return self.chosenQuantity() * self.chosenLevel().training_cost;
-        });
-
-        self.getTotalYardSpace = ko.computed(function(){
-            return self.chosenQuantity() * self.troop.space;
-        });
-
-        self.adjustQuantity = function(num) {
-            var currentVal = parseInt(self.chosenQuantity());
-
-            if((currentVal+num) < 0) return;
-
-            self.chosenQuantity(currentVal+num);
-        };
-    }
 
     function DojoCalcViewModel () {
         var self = this;
@@ -640,7 +613,7 @@ define([
         ];
 
         self.troops = _.map(troopsData, function(troop){
-            return new TroopModel(troop);
+            return new TroopModel(troop.name, troop);
         });
 
         self.clearAllQuantity = function(){
@@ -649,24 +622,35 @@ define([
             });
         }
 
+        self.getTotalDojoQueueSpace = ko.computed(function(){
+            return _.map(self.dojos, function(dojo){
+                if(_.isUndefined(dojo.chosenLevel())) return;
+                return dojo.chosenLevel().queueLength;
+            }).reduce(addToTotal);
+        })
+
         self.getSpaceConsumed = ko.computed(function(){
-            return total = _.map(self.troops, function(troop){
+            return _.map(self.troops, function(troop){
                 return troop.getTotalYardSpace();
-            }).reduce(function(total, n){ return total + n });
+            }).reduce(addToTotal);
         });
 
         self.getSpaceAvailable = ko.computed(function(){
-            return total = _.map(self.practiceYards, function(practiceYard){
+            return _.map(self.practiceYards, function(practiceYard){
                 if(_.isUndefined(practiceYard.chosenLevel())) return;
                 return practiceYard.chosenLevel().troopSpace;
-            }).reduce(function(total, n){ return total + n });
+            }).reduce(addToTotal);
         });
 
         self.getGrandTotalCost = ko.computed(function(){
-            return total = _.map(self.troops, function(troop){
+            return _.map(self.troops, function(troop){
                 return troop.getTotalCost();
-            }).reduce(function(total, n){ return total + n });
+            }).reduce(addToTotal);
         });
+
+        function addToTotal(total, n) {
+            return total + n;
+        }
 
         self.numberWithCommas = function(num){
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
