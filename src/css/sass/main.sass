@@ -4,17 +4,52 @@ body
     font-family: 'Roboto', sans-serif
     padding-top: 70px
 
+.essence-icon
+    display: inline-block
+    vertical-align: middle
+    width: 15px
+    height: 15px
+    background: url('../images/essence.png')
+
 #dojo-calculator
-table
-    thead
-        font-weight: bold
-        .qty-clear
-            line-height: 13px
-            margin-left: 10px
-    tbody
-        .troop-quantity
-            height: 20px
-        .timeBtn
-            padding: 0 4px
-            font-size: 16px
-            line-height: 18px
+    table
+        thead
+            font-weight: bold
+            .qty-clear
+                line-height: 13px
+                margin-left: 10px
+        tbody
+            td
+                vertical-align: middle
+            .troop-icon-row
+                padding: 0
+            .troop-icon
+                width: 40px
+                height: 40px
+                display: block
+                &.Samurai
+                    background: url('../images/samurai-small.jpg')
+                &.Ninja
+                    background: url('../images/ninja-small.jpg')
+                &.Ram
+                    background: url('../images/ram-small.jpg')
+                &.Commander
+                    background: url('../images/commander-small.jpg')
+                &.Archer
+                    background: url('../images/archer-small.jpg')
+                &.Troll
+                    background: url('../images/troll-small.jpg')
+                &.Healer
+                    background: url('../images/healer-small.jpg')
+                &.Essence
+                    background: url('../images/essence-small.jpg')
+                &.Dragon
+                    background: url('../images/dragon-small.jpg')
+            .grand-total
+                font-weight: bold
+            .troop-quantity
+                height: 20px
+            .timeBtn
+                padding: 0 4px
+                font-size: 16px
+                line-height: 18px
