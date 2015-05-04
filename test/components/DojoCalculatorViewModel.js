@@ -1,5 +1,5 @@
 define([
-    'components/dojo-calculator-page/dojo-calculator'
+    'components/dojo-calculator-page/DojoCalculatorViewModel'
 ], function(
     dojoCalc
 ) {

@@ -1,8 +1,7 @@
 (function() {
   // Reference your test modules here
   var testModules = [
-    'components/home-page',
-    'components/dojo-calculator',
+    'components/DojoCalculatorViewModel',
   ];
 
   // After the 'jasmine-boot' module creates the Jasmine environment, load all test modules then run them
