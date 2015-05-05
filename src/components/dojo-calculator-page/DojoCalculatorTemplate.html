@@ -73,11 +73,11 @@
                 </td>
 
                 <td class="troop-qty-row">
-                    <a id="minus-time-btn" class="btn btn-default btn-xs timeBtn" role="button" data-bind="click: adjustQuantity(-1), css: { disabled: chosenQuantity() === 0 }">–</a>
+                    <a id="minus-time-btn" class="btn btn-default btn-xs timeBtn" role="button" data-bind="click: function(){ adjustQuantity(-1) }, css: { disabled: chosenQuantity() === 0 }">–</a>
 
                     <input class="troop-quantity" size="3" data-bind="value: chosenQuantity">
 
-                    <a id="plus-time-btn" class="btn btn-default btn-xs timeBtn" role="button" data-bind="click: adjustQuantity(1)">+</a>
+                    <a id="plus-time-btn" class="btn btn-default btn-xs timeBtn" role="button" data-bind="click: function() { adjustQuantity(1) }">+</a>
                 </td>
 
                 <td class="troop-cost-row" data-bind="text: $parent.formatNumberWithCommas(getTotalCost())"></td>
