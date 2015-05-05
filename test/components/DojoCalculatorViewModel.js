@@ -59,26 +59,92 @@ define([
                 }
             ]
 
-            dojoData = {
-                name: "Dojo",
-                tiers: [
-                    {
-                        "level": 0,
-                        "queueLength": 0,
-                        "castleLevel": 0,
-                    },
-                    {
-                        "level": 1,
-                        "queueLength": 20,
-                        "castleLevel": 1,
-                    },
-                    {
-                        "level": 2,
-                        "queueLength": 40,
-                        "castleLevel": 2,
-                    }
-                ]
-            }
+            dojoData = [
+                {
+                    id: "1",
+                    name: "Dojo",
+                    tiers: [
+                        {
+                            "level": 0,
+                            "queueLength": 0,
+                            "castleLevel": 0,
+                        },
+                        {
+                            "level": 1,
+                            "queueLength": 20,
+                            "castleLevel": 1,
+                        },
+                        {
+                            "level": 2,
+                            "queueLength": 40,
+                            "castleLevel": 2,
+                        }
+                    ]
+                },
+                {
+                    id: "2",
+                    name: "Dojo",
+                    tiers: [
+                        {
+                            "level": 0,
+                            "queueLength": 0,
+                            "castleLevel": 0,
+                        },
+                        {
+                            "level": 1,
+                            "queueLength": 20,
+                            "castleLevel": 1,
+                        },
+                        {
+                            "level": 2,
+                            "queueLength": 40,
+                            "castleLevel": 2,
+                        }
+                    ]
+                },
+                {
+                    id: "3",
+                    name: "Dojo",
+                    tiers: [
+                        {
+                            "level": 0,
+                            "queueLength": 0,
+                            "castleLevel": 0,
+                        },
+                        {
+                            "level": 1,
+                            "queueLength": 20,
+                            "castleLevel": 1,
+                        },
+                        {
+                            "level": 2,
+                            "queueLength": 40,
+                            "castleLevel": 2,
+                        }
+                    ]
+                },
+                {
+                    id: "4",
+                    name: "Dojo",
+                    tiers: [
+                        {
+                            "level": 0,
+                            "queueLength": 0,
+                            "castleLevel": 0,
+                        },
+                        {
+                            "level": 1,
+                            "queueLength": 20,
+                            "castleLevel": 1,
+                        },
+                        {
+                            "level": 2,
+                            "queueLength": 40,
+                            "castleLevel": 2,
+                        }
+                    ]
+                },
+            ]
 
             practiceYardData = {
                 name: "Practice Yard",
@@ -107,8 +173,10 @@ define([
             ]
 
             DojoModelInstances = [
-                new DojoModel(dojoData),
-                new DojoModel(dojoData)
+                new DojoModel(dojoData[0]),
+                new DojoModel(dojoData[1]),
+                new DojoModel(dojoData[2]),
+                new DojoModel(dojoData[3])
             ]
 
             PracticeYardInstances = [
@@ -214,6 +282,13 @@ define([
 
                 expect(getDojo(1).available()).toBe(true);
                 expect(getDojo(2).available()).toBe(false);
+            });
+
+            it('should get all available dojos', function(){
+                getDojo(4).chosenLevel(getDojoLevel(1));
+                getDojo(2).chosenLevel(getDojoLevel(1));
+
+                expect(DojoCalcInstance.getAvailableDojos().length).toEqual(2);
             });
         });
 

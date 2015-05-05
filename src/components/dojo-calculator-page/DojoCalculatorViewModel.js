@@ -55,6 +55,16 @@ define([
             }).reduce(addToTotal);
         });
 
+        self.distributeTroopToAvailableDojo = function() {
+            var availableDojoArray = self.getAvailableDojos();
+        }
+
+        self.getAvailableDojos = function() {
+            return _.filter(self.dojos, function(dojo){
+                return dojo.available();
+            });
+        }
+
         function addToTotal(total, n) {
             return total + n;
         }

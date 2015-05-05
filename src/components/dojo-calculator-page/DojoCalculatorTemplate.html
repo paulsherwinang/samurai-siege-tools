@@ -49,10 +49,9 @@
                 <td class="troop-qty-row">Qty<a class="qty-clear btn btn-danger btn-xs" role="button" data-bind="click: clearAllTroopQuantity()">Clear</a></td>
                 <td class="troop-cost-row">Total <span class="essence-icon" style="margin-left: 5px"></span></td>
                 <!-- ko foreach: dojos -->
-                <td>
-                    <span data-bind="text: 'Lv.'+chosenLevel().level"></span><br>
-                    <span></span> /
-                    <span data-bind="text: chosenLevel().queueLength"></span>
+                <td class="dojo-troop-qty" height="60" width="50">
+                    <span data-bind="text: available() ? 'Lv.'+chosenLevel().level : ''"></span><br>
+                    <span data-bind="text: available() ? '/ '+chosenLevel().queueLength : ''"></span>
                 </td>
                 <!-- /ko -->
             </tr>
@@ -84,7 +83,7 @@
                 
 
                 <!-- ko foreach: $parent.dojos -->
-                <td>
+                <td class="dojo-troop-qty">
                     <!-- <div data-bind="text: chosenLevel().queueLength"></div> -->
                 </td>
                 <!-- /ko -->
