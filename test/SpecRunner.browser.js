@@ -2,6 +2,9 @@
   // Reference your test modules here
   var testModules = [
     'components/DojoCalculatorViewModel',
+    'components/DojoModel',
+    'components/TroopModel',
+    'components/PracticeYardModel',
   ];
 
   // After the 'jasmine-boot' module creates the Jasmine environment, load all test modules then run them

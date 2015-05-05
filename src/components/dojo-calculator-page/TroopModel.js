@@ -28,7 +28,6 @@ define(['lodash', 'knockout'], function(_, ko){
         return result;
     };
 
-
     function TroopModel(name, data) {
         var self = this;
 

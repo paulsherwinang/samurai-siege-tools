@@ -1,7 +1,13 @@
 define([
-    'components/dojo-calculator-page/DojoCalculatorViewModel'
+    'components/dojo-calculator-page/DojoCalculatorViewModel',
+    'components/dojo-calculator-page/TroopModel',
+    'components/dojo-calculator-page/PracticeYardModel',
+    'components/dojo-calculator-page/DojoModel'
 ], function(
-    dojoCalc
+    dojoCalc,
+    troopModel,
+    PracticeYardModel,
+    dojoModel
 ) {
 
     describe('dojo calculator page', function() {
