@@ -1,8 +1,9 @@
 define(['knockout'], function(ko){
-	function PracticeYardModel(practiceYardTiersData) {
+	function PracticeYardModel(data) {
         var self = this;
 
-        self.data = practiceYardTiersData;
+        self.name = data.name;
+        self.tiers = data.tiers;
         self.chosenLevel = ko.observable();
     }
 

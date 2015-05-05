@@ -28,17 +28,20 @@ define(['lodash', 'knockout'], function(_, ko){
         return result;
     };
 
-    function TroopModel(name, data) {
+    function TroopModel(data) {
         var self = this;
 
-        self.troop = data;
-        self.name = name;
+        self.id = data.id;
+        self.name = data.name;
+        self.space = data.space;
+        self.training_time = data.training_time;
+        self.tiers = data.tiers;
 
         self.chosenQuantity = ko.observable(0).extend({ numeric: 0 });
-        self.chosenLevel = ko.observable();
+        self.chosenLevel = ko.observable(self.tiers[0]);
 
         self.getTotalTrainingTime = ko.computed(function(){
-            return self.chosenQuantity() * self.troop.training_time;
+            return self.chosenQuantity() * self.training_time;
         });
 
         self.getTotalCost = ko.computed(function(){
@@ -47,7 +50,7 @@ define(['lodash', 'knockout'], function(_, ko){
         });
 
         self.getTotalYardSpace = ko.computed(function(){
-            return self.chosenQuantity() * self.troop.space;
+            return self.chosenQuantity() * self.space;
         });
 
         self.adjustQuantity = function(num) {

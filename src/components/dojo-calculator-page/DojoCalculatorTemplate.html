@@ -10,7 +10,7 @@
                     <div class="row">
                         <!-- ko foreach: practiceYards -->
                         <div class="col-xs-3">
-                            <select data-bind="options: data,
+                            <select data-bind="options: tiers,
                                             optionsText: 'level',
                                             value: chosenLevel"></select>
                         </div>
@@ -26,7 +26,7 @@
                     <div class="row">
                         <!-- ko foreach: dojos -->
                         <div class="col-xs-3">
-                            <select data-bind="options: data,
+                            <select data-bind="options: tiers,
                                             optionsText: 'level',
                                             value: chosenLevel"></select>
                         </div>
@@ -46,7 +46,7 @@
             <tr>
                 <td colspan="2" class="troop-name-row">Name</td>
                 <td class="troop-level-row">Level</span></td>
-                <td class="troop-qty-row">Qty<a class="qty-clear btn btn-danger btn-xs" role="button" data-bind="click: clearAllQuantity()">Clear</a></td>
+                <td class="troop-qty-row">Qty<a class="qty-clear btn btn-danger btn-xs" role="button" data-bind="click: clearAllTroopQuantity()">Clear</a></td>
                 <td class="troop-cost-row">Total <span class="essence-icon" style="margin-left: 5px"></span></td>
                 <!-- ko foreach: dojos -->
                 <td>
@@ -61,13 +61,13 @@
             <!-- ko foreach: troops -->
             <tr>
                 <td width="40" class="troop-icon-row">
-                    <span data-bind="attr: { class: 'troop-icon '+troop.name }"></span>
+                    <span data-bind="attr: { class: 'troop-icon '+name }"></span>
                 </td>
 
-                <td class="troop-name-row" data-bind="text: troop.name"></td>
+                <td class="troop-name-row" data-bind="text: name"></td>
 
                 <td class="troop-level-row">
-                    <select data-bind="options: troop.tiers,
+                    <select data-bind="options: tiers,
                                        optionsText: 'level',
                                        value: chosenLevel"></select>
                 </td>
@@ -80,7 +80,7 @@
                     <a id="plus-time-btn" class="btn btn-default btn-xs timeBtn" role="button" data-bind="click: adjustQuantity(1)">+</a>
                 </td>
 
-                <td class="troop-cost-row" data-bind="text: $parent.numberWithCommas(getTotalCost())"></td>
+                <td class="troop-cost-row" data-bind="text: $parent.formatNumberWithCommas(getTotalCost())"></td>
                 
 
                 <!-- ko foreach: $parent.dojos -->
@@ -97,7 +97,7 @@
                 <td></td>
                 <td></td>
                 <td><span data-bind="text: getSpaceConsumed(), css: { warning: getSpaceConsumed() > getSpaceAvailable() }"></span> / <span data-bind="text: getSpaceAvailable()"></span></td>
-                <td data-bind="text: numberWithCommas(getGrandTotalCost())"></td>
+                <td data-bind="text: formatNumberWithCommas(getGrandTotalCost())"></td>
             </tr>
         </tbody>
     </table>
