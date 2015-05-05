@@ -1,4 +1,5 @@
-{
+define([], function(){
+	return {
     "name": "Dojo",
     "tiers": [
         {
@@ -58,3 +59,4 @@
         }
     ]
 }
+});
