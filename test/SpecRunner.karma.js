@@ -8,7 +8,10 @@ for (var file in window.__karma__.files) {
 }
 
 requirejs.config({
-    baseUrl: '/base/src',
+    baseUrl: '/base',
+    paths: {
+    	'jquery': 'src/bower_modules/jquery/dist/jquery'
+    },
     deps: tests,
     callback: window.__karma__.start
 });
