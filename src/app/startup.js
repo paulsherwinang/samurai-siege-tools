@@ -42,12 +42,9 @@ define([
               new PracticeYardModel(PracticeYardData)
           ]
 
-          DojoModels = [
-            new DojoModel(DojoData),
-            new DojoModel(DojoData),
-            new DojoModel(DojoData),
-            new DojoModel(DojoData),
-          ];
+          DojoModels = _.map(DojoData, function(dojoData){
+            return new DojoModel(dojoData)
+          });
           
           return new DojoCalculatorViewModel(TroopModels, DojoModels, PracticeYardModels);
         }

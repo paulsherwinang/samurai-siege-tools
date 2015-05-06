@@ -76,7 +76,7 @@ gulp.task('default', ['html', 'js', 'css'], function(callback) {
 });
 
 gulp.task('httpServer', function(){
-    gulp.src('.')
+    gulp.src('src')
         .pipe(webserver({
             port: 8080,
             livereload: true,

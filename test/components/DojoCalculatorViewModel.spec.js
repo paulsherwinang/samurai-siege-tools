@@ -61,7 +61,7 @@ define([
 
             dojoData = [
                 {
-                    id: "1",
+                    id: 1,
                     name: "Dojo",
                     tiers: [
                         {
@@ -82,7 +82,7 @@ define([
                     ]
                 },
                 {
-                    id: "2",
+                    id: 2,
                     name: "Dojo",
                     tiers: [
                         {
@@ -103,7 +103,7 @@ define([
                     ]
                 },
                 {
-                    id: "3",
+                    id: 3,
                     name: "Dojo",
                     tiers: [
                         {
@@ -124,7 +124,7 @@ define([
                     ]
                 },
                 {
-                    id: "4",
+                    id: 4,
                     name: "Dojo",
                     tiers: [
                         {
@@ -288,7 +288,7 @@ define([
                 getDojo(4).chosenLevel(getDojoLevel(1));
                 getDojo(2).chosenLevel(getDojoLevel(1));
 
-                expect(DojoCalcInstance.getAvailableDojos().length).toEqual(2);
+                expect(DojoCalcInstance._getAvailableDojos().length).toEqual(2);
             });
         });
 
@@ -299,6 +299,36 @@ define([
 
                 expect(DojoCalcInstance.getSpaceAvailable()).toEqual(40);
             });
+        });
+
+        describe('troop distribution to dojo', function(){
+            it("should distribute troop object in dojo's housedTroop array with troop name, level, and training time", function(){
+                var troopObjInHoused = {
+                    name: "Troop1",
+                    id: "1",
+                    space: 1,
+                    training_time: 5000
+                };
+
+                getDojo(2).chosenLevel(getDojoLevel(1));
+                getDojo(4).chosenLevel(getDojoLevel(2));
+
+                DojoCalcInstance.distributeTroops();
+
+                getTroop(1).chosenQuantity(1);
+
+                expect(getDojo(2).housedTroops()).toContain(troopObjInHoused);
+
+            });
+
+            xit("should only distribute to available dojos", function(){
+                expect()
+            });
+
+
+            it("should distribute by nearest average training time per available dojo")
+            it("should distribute to dojo with capable troop space in it")
+            it("should distribute ")
         });
 
         function getTroop(index) {

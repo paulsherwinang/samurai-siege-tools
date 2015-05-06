@@ -1,5 +1,4 @@
 define(['lodash', 'knockout'], function(_, ko){
-
     ko.extenders.numeric = function(target, precision) {
         var result = ko.pureComputed({
             read: target,  //always return the original observables value
@@ -38,6 +37,7 @@ define(['lodash', 'knockout'], function(_, ko){
         self.tiers = data.tiers;
 
         self.chosenQuantity = ko.observable(0).extend({ numeric: 0 });
+
         self.chosenLevel = ko.observable(self.tiers[0]);
 
         self.getTotalTrainingTime = ko.computed(function(){
