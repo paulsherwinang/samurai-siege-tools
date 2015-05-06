@@ -5647,10 +5647,14 @@ body {
   background: url("../images/essence.png"); }
 
 #dojo-calculator table thead .troop-name-row, #dojo-calculator table thead .troop-level-row, #dojo-calculator table thead .troop-qty-row, #dojo-calculator table thead .troop-cost-row {
-  font-weight: bold; }
+  font-weight: bold;
+  vertical-align: middle; }
 #dojo-calculator table thead .qty-clear {
   line-height: 13px;
   margin-left: 10px; }
+#dojo-calculator table thead .dojo-troop-qty {
+  vertical-align: middle;
+  font-size: 12px; }
 #dojo-calculator table tbody td {
   vertical-align: middle; }
 #dojo-calculator table tbody .troop-icon-row {
