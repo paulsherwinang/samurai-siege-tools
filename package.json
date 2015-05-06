@@ -25,6 +25,7 @@
     "gulp-karma": "0.0.4"
   },
   "scripts": {
+    "test": "gulp test",
     "postinstall": "bower install"
   },
   "dependencies": {
