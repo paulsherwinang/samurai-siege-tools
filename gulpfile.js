@@ -12,7 +12,7 @@ var gulp = require('gulp'),
     webserver = require('gulp-webserver'),
     sass = require('gulp-ruby-sass'),
     watch = require('gulp-watch'),
-    karma = require('gulp-karma');
+    karma = require('karma').server;
 
 // Config
 var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require.config.js') + '; require;');
@@ -97,3 +97,16 @@ gulp.task('watchSass', function(){
 });
 
 gulp.task('serve', ['watchSass', 'httpServer']);
+
+gulp.task('test', function (done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done);
+});
+
+gulp.task('test', function (done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js'
+  }, done);
+});
