@@ -105,7 +105,7 @@ gulp.task('test', function (done) {
   }, done);
 });
 
-gulp.task('test', function (done) {
+gulp.task('test:auto', function (done) {
   karma.start({
     configFile: __dirname + '/karma.conf.js'
   }, done);
