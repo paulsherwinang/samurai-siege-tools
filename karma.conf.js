@@ -12,18 +12,20 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/app/require.config.js',
-      'test/require.config.js',
+      // 'src/app/require.config.js',
+      // 'test/require.config.js',
       'test/SpecRunner.karma.js',
       { pattern: 'src/components/**/*.js', included: false },
-      { pattern: 'src/**/*.html', included: false },
-      { pattern: 'test/components/*.js', included: false }
+      { pattern: 'src/components/**/*.html', included: false },
+      { pattern: 'src/bower_modules/**/*.js', included: false },
+      { pattern: 'test/components/*.spec.js', included: false }
     ],
 
 
     // list of files to exclude
     exclude: [
-      
+        'src/app/startup.js',
+        'src/bower_modules/crossroads/**/*.js'
     ],
 
 
