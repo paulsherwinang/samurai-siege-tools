@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -16,8 +17,10 @@
       <script data-main="app/startup" src="bower_modules/requirejs/require.js"></script>
     <!-- endbuild -->
   </head>
+
   <body>
     <nav-bar params="route: route"></nav-bar>
     <div id="page" class="container-fluid" data-bind="component: { name: route().page, params: route }"></div>
   </body>
+
 </html>
