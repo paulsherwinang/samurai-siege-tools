@@ -80,27 +80,24 @@ define([
                         training_time: troop.training_time
                     }
 
-                    _alternateToAvailableDojos(troopObjInHoused);
+                    findEligibleDojo(troopObjInHoused);
                 });
             });
         }
 
         self.distributeTroops();
 
-        function _alternateToAvailableDojos(troop) {
-            var dojoAvailableIds = _.pluck(self._getAvailableDojos(), 'id');
-
-            _.each(dojoAvailableIds, function(availableId){
-                if(isQualified(availableId, troop)) {
-                    var dojo = _.find(self.dojos, {id: availableId});
-                    dojo.housedTroops.push(troop);
+        function findEligibleDojo(troop) {
+            var eligibleDojo = _.find(self._getAvailableDojos(), function(availableDojo){
+                if(isQualified(availableDojo, troop)) {
+                    availableDojo.housedTroops.push(troop);
                 };
             });
+
+            console.log(eligibleDojo);
         }
 
-        function isQualified(id, troop) {
-            var dojo = _.find(self.dojos, { 'id': id });
-
+        function isQualified(dojo, troop) {
             var dojoConsumedSpace = _.sum(_.pluck(dojo.housedTroops(), 'space'));
             var housingSpace = dojo.chosenLevel().queueLength;
             var troopSpace = troop.space;
@@ -109,7 +106,7 @@ define([
                 return false;
             }
 
-            console.log(dojoConsumedSpace);
+            return true;
         }
 
         function addToTotal(total, n) {

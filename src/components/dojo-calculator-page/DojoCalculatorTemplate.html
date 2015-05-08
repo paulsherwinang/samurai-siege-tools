@@ -50,7 +50,9 @@
                 <td class="troop-cost-row">Total <span class="essence-icon" style="margin-left: 5px"></span></td>
                 <!-- ko foreach: dojos -->
                 <td class="dojo-troop-qty" height="60" width="50">
-                    <span data-bind="text: available() ? 'Lv.'+chosenLevel().level : ''"></span><br>
+                    <span data-bind="text: available() ? 'Lv.'+chosenLevel().level : ''"></span>
+                    <br>
+                    <span data-bind="text: housedTroops().length"></span>
                     <span data-bind="text: available() ? '/ '+chosenLevel().queueLength : ''"></span>
                 </td>
                 <!-- /ko -->
@@ -84,7 +86,7 @@
 
                 <!-- ko foreach: $parent.dojos -->
                 <td class="dojo-troop-qty">
-                    <!-- <div data-bind="text: chosenLevel().queueLength"></div> -->
+                    <div data-bind="text: "></div>
                 </td>
                 <!-- /ko -->
                 
