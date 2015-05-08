@@ -318,7 +318,6 @@ define([
                 getTroop(1).chosenQuantity(1);
 
                 expect(getDojo(2).housedTroops()).toContain(troopObjInHoused);
-
             });
 
             xit("should only distribute to available dojos", function(){

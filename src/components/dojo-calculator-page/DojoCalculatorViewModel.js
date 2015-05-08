@@ -29,6 +29,12 @@ define([
             }).reduce(addToTotal);
         });
 
+        self.getGrandTotalTime = ko.computed(function(){
+            return _.map(self.troops, function(troop){
+                return troop.getTotalTrainingTime();
+            }).reduce(addToTotal);
+        });
+
         self.getGrandTotalCost = ko.computed(function(){
             return _.map(self.troops, function(troop){
                 return troop.getTotalCost();
@@ -88,16 +94,27 @@ define([
         self.distributeTroops();
 
         function findEligibleDojo(troop) {
-            var eligibleDojo = _.find(self._getAvailableDojos(), function(availableDojo){
-                if(isQualified(availableDojo, troop)) {
+            _.find(self._getAvailableDojos(), function(availableDojo){
+                var isQualifiedDojo = isQualified(availableDojo, troop);
+
+                if(isQualifiedDojo) {
                     availableDojo.housedTroops.push(troop);
                 };
-            });
 
-            console.log(eligibleDojo);
+                return isQualifiedDojo;
+            });
         }
 
         function isQualified(dojo, troop) {
+            var averageTimePerDojo = self.getGrandTotalTime() / self._getAvailableDojos().length;
+            
+            console.log("================");
+            console.log("DOJO " + dojo.id, "TROOP " + troop.name);
+            console.log("Grandtotaltroops", self.getGrandTotalTime());
+            console.log("average", averageTimePerDojo);
+            console.log("totalofthisdojo", dojo.getHousedTroopTotalTime());
+            console.log("================");
+
             var dojoConsumedSpace = _.sum(_.pluck(dojo.housedTroops(), 'space'));
             var housingSpace = dojo.chosenLevel().queueLength;
             var troopSpace = troop.space;
@@ -106,7 +123,7 @@ define([
                 return false;
             }
 
-            return true;
+            if(dojo.getHousedTroopTotalTime() < averageTimePerDojo) return true;
         }
 
         function addToTotal(total, n) {
@@ -115,6 +132,24 @@ define([
 
         self.formatNumberWithCommas = function(num){
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        self.formatTimeToString = function(timeInMilli) {
+            var seconds = Math.round((timeInMilli / 1000) % 60);
+            var minutes = Math.round((timeInMilli / (1000*60)) % 60);
+            var hours = Math.round((timeInMilli / (1000*60*60)) % 24);
+
+            return formatStr(seconds, minutes, hours);
+
+            function formatStr(seconds, minutes, hours) {
+                var str = "";
+
+                if(hours > 0) str = str + hours + " h ";
+                if(minutes > 0) str = str + minutes + "m "; 
+                if(seconds > 0) str = str + seconds + "s";
+
+                return str;
+            }
         }
     }
 

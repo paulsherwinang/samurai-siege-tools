@@ -49,10 +49,10 @@
                 <td class="troop-qty-row">Qty<a class="qty-clear btn btn-danger btn-xs" role="button" data-bind="click: clearAllTroopQuantity()">Clear</a></td>
                 <td class="troop-cost-row">Total <span class="essence-icon" style="margin-left: 5px"></span></td>
                 <!-- ko foreach: dojos -->
-                <td class="dojo-troop-qty" height="60" width="50">
+                <td class="dojo-troop-qty" height="60" width="60">
                     <span data-bind="text: available() ? 'Lv.'+chosenLevel().level : ''"></span>
                     <br>
-                    <span data-bind="text: housedTroops().length"></span>
+                    <span data-bind="text: getHousedTroopTotalSpace()"></span>
                     <span data-bind="text: available() ? '/ '+chosenLevel().queueLength : ''"></span>
                 </td>
                 <!-- /ko -->
@@ -82,7 +82,6 @@
                 </td>
 
                 <td class="troop-cost-row" data-bind="text: $parent.formatNumberWithCommas(getTotalCost())"></td>
-                
 
                 <!-- ko foreach: $parent.dojos -->
                 <td class="dojo-troop-qty">
@@ -99,6 +98,12 @@
                 <td></td>
                 <td><span data-bind="text: getSpaceConsumed(), css: { warning: getSpaceConsumed() > getSpaceAvailable() }"></span> / <span data-bind="text: getSpaceAvailable()"></span></td>
                 <td data-bind="text: formatNumberWithCommas(getGrandTotalCost())"></td>
+
+                <!-- ko foreach: dojos -->
+                    <td class="dojo-total-troop-time">
+                        <div data-bind="text: $parent.formatTimeToString(getHousedTroopTotalTime())"></div>
+                    </td>
+                <!-- /ko -->
             </tr>
         </tbody>
     </table>

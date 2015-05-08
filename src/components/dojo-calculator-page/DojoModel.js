@@ -12,6 +12,18 @@ define(['knockout'], function(ko){
         });
 
         self.housedTroops = ko.observableArray([]);
+
+        self.getHousedTroopTotalTime = function(){
+            if(_.isEmpty(self.housedTroops())) return 0;
+
+            return _.sum(_.pluck(self.housedTroops(), 'training_time'));
+        }
+
+        self.getHousedTroopTotalSpace = function(){
+            if(_.isEmpty(self.housedTroops())) return;
+
+            return _.sum(_.pluck(self.housedTroops(), 'space'));
+        }
     }
 
     return DojoModel;
