@@ -17,6 +17,8 @@ define([
         self.practiceYards = PracticeYardModels;
         self.troops = TroopModels;
 
+        self.errorMessage = ko.observable('');
+
         self.clearAllTroopQuantity = function(){
             _.each(self.troops, function(troop){
                 troop.chosenQuantity(0);
@@ -45,7 +47,8 @@ define([
             var total = 0;
 
             _.each(self.dojos, function(dojo){
-                if(_.isUndefined(dojo.chosenLevel())) return;
+                if(dojo.chosenLevel().level === 0) return;
+
                 var value = dojo.chosenLevel().queueLength;
                 total += value
             })
@@ -57,7 +60,7 @@ define([
             var total = 0
 
             _.each(self.practiceYards, function(practiceYard){
-                if(_.isUndefined(practiceYard.chosenLevel())) return;
+                if(practiceYard.chosenLevel().level === 0) return;
 
                 var value = practiceYard.chosenLevel().troopSpace;
                 total += value;
@@ -74,9 +77,11 @@ define([
 
         self.distributeTroops = function() {
             _.each(self.troops, function(troop){
-                troop.chosenQuantity.subscribe(function(newValue){
+                troop.chosenQuantity.subscribeChanged(function(newValue, oldValue){
+                    var adjustedValue = newValue - oldValue;
+
                     if(_.isEmpty(self._getAvailableDojos())) {
-                        return;
+                        return self.errorMessage("No available dojos found");
                     }
 
                     var troopObjInHoused = {
@@ -86,7 +91,17 @@ define([
                         training_time: troop.training_time
                     }
 
-                    findEligibleDojo(troopObjInHoused);
+                    if(adjustedValue > 0) {
+                        _.times(adjustedValue, function(){
+                            findEligibleDojo(troopObjInHoused);
+                        });
+                    } else {
+                        adjustedValue = Math.abs(adjustedValue);
+                        _.times(adjustedValue, function(){
+                            removeTroop(troop)
+                        });
+                    }
+
                 });
             });
         }
@@ -98,32 +113,44 @@ define([
                 var isQualifiedDojo = isQualified(availableDojo, troop);
 
                 if(isQualifiedDojo) {
+                    self.errorMessage('');
                     availableDojo.housedTroops.push(troop);
                 };
 
                 return isQualifiedDojo;
-            });
+            });            
         }
 
         function isQualified(dojo, troop) {
             var averageTimePerDojo = self.getGrandTotalTime() / self._getAvailableDojos().length;
-            
-            console.log("================");
-            console.log("DOJO " + dojo.id, "TROOP " + troop.name);
-            console.log("Grandtotaltroops", self.getGrandTotalTime());
-            console.log("average", averageTimePerDojo);
-            console.log("totalofthisdojo", dojo.getHousedTroopTotalTime());
-            console.log("================");
 
             var dojoConsumedSpace = _.sum(_.pluck(dojo.housedTroops(), 'space'));
             var housingSpace = dojo.chosenLevel().queueLength;
             var troopSpace = troop.space;
             
-            if((dojoConsumedSpace + troopSpace)> housingSpace){
-                return false;
-            }
-
+            if((dojoConsumedSpace + troopSpace)> housingSpace) return false;
             if(dojo.getHousedTroopTotalTime() < averageTimePerDojo) return true;
+
+            // console.log("================");
+            // console.log("DOJO " + dojo.id, "TROOP " + troop.name);
+            // console.log("Grandtotaltroops", self.getGrandTotalTime());
+            // console.log("average", averageTimePerDojo);
+            // console.log("totalofthisdojo", dojo.getHousedTroopTotalTime());
+            // console.log("space in / space of dojo ", dojoConsumedSpace, " / ", housingSpace);
+            // console.log("================");
+        }
+
+        function removeTroop(troop) {
+            var troopInDojo = _.findLast(self._getAvailableDojos(), function(availableDojo){
+                return _.findWhere(availableDojo.housedTroops(), {name: troop.name});
+            });
+
+            var troopIndex = _.findIndex(troopInDojo.housedTroops(), function(housedTroop){
+                return housedTroop.name === troop.name;
+            });
+
+            _.pullAt(troopInDojo.housedTroops(), troopIndex);
+            troopInDojo.housedTroops.valueHasMutated();
         }
 
         function addToTotal(total, n) {

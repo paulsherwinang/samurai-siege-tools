@@ -4,7 +4,7 @@ define(['knockout'], function(ko){
 
         self.name = data.name;
         self.tiers = data.tiers;
-        self.chosenLevel = ko.observable();
+        self.chosenLevel = ko.observable(data.tiers[0]);
     }
 
     return PracticeYardModel;

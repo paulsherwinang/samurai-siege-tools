@@ -37,6 +37,11 @@
         </div>
     </div>
 
+
+    <div data-bind="visible: errorMessage() !== ''" class="alert alert-danger" role="alert">
+        <span data-bind="text: errorMessage()"></span>
+    </div>
+
     <table id="dojo-table" class="table table-bordered">
         <thead>
             <tr style="text-align: center; font-weight: bold">

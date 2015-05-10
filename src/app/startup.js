@@ -22,6 +22,17 @@ define([
   DojoCalculatorViewModel
 ) {
 
+  ko.subscribable.fn.subscribeChanged = function(callback) {
+    var previousValue;
+    this.subscribe(function(_previousValue) {
+        previousValue = _previousValue;
+    }, undefined, 'beforeChange');
+    this.subscribe(function(latestValue) {
+        callback(latestValue, previousValue );
+    });
+  };
+
+
   // Components can be packaged as AMD modules, such as the following:
   ko.components.register('nav-bar', { require: 'components/nav-bar/nav-bar' });
   ko.components.register('home-page', { require: 'components/home-page/home' });
